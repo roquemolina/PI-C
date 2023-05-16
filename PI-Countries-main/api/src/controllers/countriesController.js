@@ -13,14 +13,7 @@ const getCountries = async (name) => {
 }
 
 const getCountryById = async (id) => {
-  return await Country.findByPk(id, {
-    include: [
-      {
-        model: Activity,
-        attributes: ["countries"]
-      }
-    ]
-  });
+  return await Country.findByPk(id);
 }
 
 module.exports = { getCountries, getCountryById };
