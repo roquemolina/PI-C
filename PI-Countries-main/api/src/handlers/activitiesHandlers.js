@@ -1,19 +1,22 @@
-const getActivityHandler = (req, res) => {
-  res.status(200).send(`GET | /activities
-  Obtiene un arreglo de objetos, donde cada objeto es una actividad turística.
-  `);
-};
-const postActivityHandler = async (req, res) => {
-  const {id, name, difficulty, length, season } = await req.body;
-  res.status(200).send(` POST | /activities
-  Esta ruta recibirá todos los datos necesarios para crear una actividad turística y relacionarla con los países solicitados.
-  Toda la información debe ser recibida por body.  Debe crear la actividad turística en la base de datos, y esta debe estar relacionada con los países indicados (al menos uno)
-  Este es el req.body id: ${id} name: ${name} diffi: ${difficulty}, length: ${length}, season: ${season}`);
+const { createActivity, getActivity } = require("../controllers/activitiesControllers");
 
-  //ACA VA A VNIR EL REQ.BODY!
-  //   ////////////////
-  //   //  REQ.BODY  //
-  //   ////////////////
+const getActivityHandler = async (req, res) => {
+  try {
+    const activity = await getActivity();
+    res.status(200).json(activity);
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+};
+
+const postActivityHandler = async (req, res) => {
+  const {name, difficulty, length, season } = req.body;
+    try {
+      const newUser = await createActivity(name, difficulty, length, season);
+      res.status(200).send(newUser);
+    } catch (error) {
+      res.status(400).json({error: error.message})
+    }
 };
 
 module.exports = { getActivityHandler, postActivityHandler };
