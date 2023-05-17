@@ -1,7 +1,7 @@
 const { getCountries, getCountryById } = require("../controllers/countriesController");
 
 const getCountriesHandler = async (req, res) => {
-  const { name } = req.body;
+  const { name } = req.query;
   try {
     const country = await getCountries(name);
     res.status(200).json(country);

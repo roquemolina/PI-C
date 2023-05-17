@@ -39,6 +39,7 @@ conn.sync({ force: true }).then(() => {
     if(!allCountries.length){
       const apiCountriesResponse = await axios.get('https://restcountries.com/v3/all');
       let apiCountries = apiCountriesResponse.data.map((e) => {
+        //return xq es mas de 1 linea https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
         return {
           id: e.cca3,
           name: e.name.common,
@@ -51,12 +52,10 @@ conn.sync({ force: true }).then(() => {
         }
       })
       await Country.bulkCreate(apiCountries);
-      console.log('creado')
+      console.log('DB created');
     }
     console.log('%s listening at 3001'); // eslint-disable-line no-console
 
-    const user = await Country.findByPk("GIB");
-    console.log(user);
   
   
   });
