@@ -20,6 +20,7 @@
 const server = require('./src/app.js');
 const { conn, Country } = require('./src/db.js');
 const axios = require("axios");
+const downloadedData = require('./countries.json');
 // ENDPOINT
 /* https://restcountries.com/v3/all */
 
@@ -37,8 +38,8 @@ conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
     const allCountries = Country.findAll();
     if(!allCountries.length){
-      const apiCountriesResponse = await axios.get('https://restcountries.com/v3/all');
-      let apiCountries = apiCountriesResponse.data.map((e) => {
+      /* const apiCountriesResponse = await axios.get('https://restcountries.com/v3/all'); */
+      let apiCountries = downloadedData.map((e) => {
         //return xq es mas de 1 linea https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
         return {
           id: e.cca3,
