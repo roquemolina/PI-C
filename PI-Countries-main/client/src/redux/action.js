@@ -1,6 +1,8 @@
 import axios from 'axios';
 export const GET_COUNTRIES = 'GET_COUNTRIES';
-export const GET_ACTIVITIES = "GET_ACTIVITIES"
+export const GET_ACTIVITIES = "GET_ACTIVITIES";
+export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
+export const GET_DETAIL = "GET_DETAIL";
 export const BY_CONTINENT = 'BY_CONTINENT';
 export const REMOVE_FAV = 'REMOVE_FAV';
 export const FILTER = 'FILTER';
@@ -28,6 +30,32 @@ export const getActivities = () => {
         });
     };
 };
+export const getDetail = (id) => {
+  const endpoint = `http://localhost:3001/countries/${id}`;
+  return async (dispatch) => {
+     let {data} = await axios.get(endpoint);
+        return dispatch({
+           type: GET_DETAIL,
+           payload: data,
+        });
+    };
+};
+export const searchCountries = (countryName) => {
+  const endpoint = 'http://localhost:3001/countries';
+  return async (dispatch) => {
+     let {data} = await axios.get(endpoint, {
+      params: {
+        name: countryName,
+      }
+    });
+        return dispatch({
+           type: SEARCH_COUNTRIES,
+           payload: data,
+        });
+    };
+};
+
+
 
 export function getByContinent(continent) {
   return {

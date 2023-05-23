@@ -31,10 +31,6 @@ export default function validation (obj) {
   if(obj.season === "") {
     errors.season = 'Se requiere una season'
   }
-
-
-
-
 /*   if(obj.password.length < 6 || obj.password.length > 10) {
     errors.password = 'La longitud debe ser entre 6 y 10 caracteres'
   } else if (!passwordRegExp.test(obj.password)){

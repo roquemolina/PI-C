@@ -1,10 +1,12 @@
-import { GET_COUNTRIES, GET_ACTIVITIES, BY_CONTINENT, FILTER, ORDER, REMOVE_FAV } from "./action";
+import { GET_COUNTRIES, GET_ACTIVITIES, SEARCH_COUNTRIES, GET_DETAIL, BY_CONTINENT, FILTER, ORDER, REMOVE_FAV } from "./action";
 
 const initialState = {
   countries: [],
   activities: [],
   displayedCountries: [],
   displayedActivities: [],
+  searchQuery: [],
+  countryDetail:{}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -20,6 +22,16 @@ const rootReducer = (state = initialState, action) => {
         ...state, 
         activities: action.payload,
         displayedActivities: action.payload
+      }
+      case SEARCH_COUNTRIES:
+      return {
+        ...state,
+        searchQuery: action.payload
+      }
+      case GET_DETAIL:
+      return {
+        ...state,
+        countryDetail: action.payload
       }
       case BY_CONTINENT:
         if(action.payload === 'ALL') {
