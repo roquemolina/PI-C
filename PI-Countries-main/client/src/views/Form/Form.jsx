@@ -34,6 +34,7 @@ let initialForm = {
         )
     }
 
+
       
     function handleSubmit (e) {
       e.preventDefault();
@@ -64,7 +65,7 @@ let initialForm = {
     <p>
         Difficulty:
         <label>
-          <input type="radio" name="difficulty" value="1" onChange={handleChange}/>
+          <input type="radio" name="difficulty" value="1" onChange={handleChange} />
           Very-Easy
         </label>
         <label>

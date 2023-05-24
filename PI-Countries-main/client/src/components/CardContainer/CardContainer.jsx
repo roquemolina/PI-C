@@ -2,9 +2,10 @@ import Card from "../Card/Card";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getCountries, getActivities, getByContinent, getByPopulation, searchCountries, searchActivities } from "../../redux/action";
+import { getCountries, getActivities, getByContinent, getByPopulation, searchCountries, searchActivities, getByName } from "../../redux/action";
 import paginate from "../../helpers/paginate";
 import SearchForm from "../SearchForm/SearchForm";
+import ActCard from "../ActCard/ActCard";
 
 const CardContaner = () => {
    const dispatch = useDispatch();
@@ -12,25 +13,25 @@ const CardContaner = () => {
       dispatch(getCountries());
       dispatch(getActivities());
    }, [dispatch]);
-   
-   
+
    const countries = useSelector((state) => state.countries);
    const activities = useSelector((state) => state.activities);
    const searchQuery = useSelector((state) => state.searchQuery);
+   const continentFilter = useSelector((state) => state.byContinent);
    const [displayed, setDisplayed] = useState([]);
    const [displayedObj, setDisplayedObj] = useState([]);
    const [currentPage, setCurrentPage] = useState(1);
    const [maxPage, setMaxPage] = useState(null);
+   
    let pagination = paginate(countries);
    
-   const byContinent = useSelector((state) => state.byContinent);
    
    useEffect(() => {
-      setDisplayed(pagination.items);
-      setMaxPage(pagination.totalPages);
-      setDisplayedObj(countries);
-   }, [countries]);
-
+         setDisplayed(pagination.items);
+         setMaxPage(pagination.totalPages);
+         setDisplayedObj(countries);
+      }, [countries]);
+   
    const putActivities = (event) => {
       if(event.target.id === "get-activities") {
          setCurrentPage(1);
@@ -63,7 +64,15 @@ const CardContaner = () => {
       setMaxPage(pagination.totalPages);
       
     }, [searchQuery])
-   
+    
+    useEffect(() => {
+       setCurrentPage(1);
+       setDisplayedObj(continentFilter);
+       pagination = paginate(continentFilter);
+       setDisplayed(pagination.items);
+       setMaxPage(pagination.totalPages);
+       
+     }, [continentFilter])
    
    const handlePages = (event) => {
    if(event.target.id === "prev-btn") {
@@ -80,12 +89,7 @@ const CardContaner = () => {
    };
 };
 const byContinents = (event) => {
-   if(event.target.id === 'byCont') {
-      dispatch(getByContinent('ALL'));
-   }
-   if(event.target.id === 'byCont2') {
-      dispatch(getByContinent('Africa'));
-   }
+   dispatch(getByContinent(event.target.value));
 }
 const byPopulatioin = (event) => {
    if(event.target.id === 'byPop') {
@@ -93,6 +97,14 @@ const byPopulatioin = (event) => {
    }
    if(event.target.id === 'byPop2') {
       dispatch(getByPopulation());
+   }
+}
+const byName = (event) => {
+   if(event.target.id === 'nameAZ') {
+      dispatch(getByName('AZ'));
+   }
+   if(event.target.id === 'nameZA') {
+      dispatch(getByName());
    }
 }
 
@@ -106,31 +118,55 @@ const byPopulatioin = (event) => {
          <button id="next-btn" onClick={handlePages}>next</button>
          <button id="get-activities" onClick={putActivities}>Get Act</button>
          <button id="get-countries" onClick={putActivities}>Get Cuontries</button>
-         <button id="byCont" onClick={(event) => byContinents(event)}>CONTTTT</button>
-         <button id="byCont2" onClick={(event) => byContinents(event)}>CONTTTT</button>
-         <button id="byPop" onClick={(event) => byPopulatioin(event)}>POP1</button>
-         <button id="byPop2" onClick={(event) => byPopulatioin(event)}>POP2</button>
+         <button id="byPop" onClick={byPopulatioin}>POP1</button>
+         <button id="byPop2" onClick={byPopulatioin}>POP2</button>
+         <button id="nameAZ" onClick={byName}>Asc.</button>
+         <button id="nameZA" onClick={byName}>Desc.</button>
       </div>
 
       <div>
-         
+      <label>
+      Continent:
+      <select name="continents" onChange={byContinents}>
+        <option value="All" >All</option>
+        <option value="Asia">Asia</option>
+        <option value="South America">South America</option>
+        <option value="North America">North America</option>
+        <option value="Oceania">Oceania</option>
+        <option value="Antarctica">Antarctica</option>
+        <option value="Africa">Africa</option>
+        <option value="Europe">Europe</option>
+      </select>
+    </label>
       </div>
-
-      {displayed.map(({id, name, image, continent, capital, subregion, area, population}) => (
-            //e desestructurado
-            <Card 
-               key={id}
-               id={id}
-               name={name}
-               image={image}
-               continent={continent}
-               capital={capital}
-               subregion={subregion}
-               area={area}
-               population={population}
+      {displayed.map((el) => {
+         if(typeof el.id === 'string') {
+            return (
+               <Card 
+                  key={el.name}
+                  id={el.id}
+                  name={el.name}
+                  image={el.image}
+                  continent={el.continent}
+                  capital={el.capital}
+                  subregion={el.subregion}
+                  area={el.area}
+                  population={el.population}
+               />
+            )
+         } else {
+            return (
+               <ActCard 
+               key={el.id}
+               id={el.id}
+               name={el.name}
+               paises={el.countries}
             />
             )
-         )}
+         }
+      }
+      )}
+      <p>{currentPage} of {maxPage}</p>
     </div>
    );
 }
