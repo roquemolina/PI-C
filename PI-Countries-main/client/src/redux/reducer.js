@@ -12,39 +12,39 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-      case GET_COUNTRIES:
+    case GET_COUNTRIES:
       return {
         ...state, 
         countries: action.payload,
         displayedCountries: action.payload
       }
 
-      case GET_ACTIVITIES:
+    case GET_ACTIVITIES:
       return {
         ...state, 
         activities: action.payload,
         displayedActivities: action.payload
       }
       
-      case SEARCH_COUNTRIES:
+    case SEARCH_COUNTRIES:
       return {
         ...state,
         searchQuery: state.countries.filter(el => el.name.toLowerCase().includes(action.payload.toLowerCase()))
       }
 
-      case SEARCH_ACTIVITIES:
+    case SEARCH_ACTIVITIES:
         return {
           ...state,
           searchQuery: state.activities.filter(el => el.name.toLowerCase().includes(action.payload.toLowerCase()))
       }
 
-      case GET_DETAIL:
+    case GET_DETAIL:
       return {
         ...state,
         countryDetail: action.payload
-      }
+    }
 
-      case BY_CONTINENT:
+    case BY_CONTINENT:
         switch (action.payload) {
           case "All":
             return {
@@ -90,78 +90,52 @@ const rootReducer = (state = initialState, action) => {
               return {
                 ...state
               }
-      }
-        case ORDER:
-          const newCha = [...state.countries];
-          if(action.payload === 'A') {
-            return {
-              ...state,
-               countries: state.countries.toSorted((a, b) => a.population - b.population)
-               /*
-               -----myFavorites: state.allCharacters.sort((a, b) => a.id - b.id)--- MALLL! MODIFICA EL ESTADO PORQUE NO DA UN
-               NUEVO ARRAY!
-  
-              NO SE PUEDE USAR directamente el sort, o puedo usar el toSorted() xq me modificaEL STATE.ALLCHARACTER array, 
-              en el filter de arriba se puede porque me da un nuevo array, el sort me modifica el 
-              array del estado global. POR ESO NO LO USO DE UNA
-              SI LO QUIERE USAR DE UNA PODRÍA USAR UN toSorted();*/
-              /* myFavorites: newCha.sort((a, b) => a.id - b.id) */
-           }
+    }
+    case ORDER:
+      const newCha = [...state.countries];
+      if(action.payload === 'A') {
+        return {
+          ...state,
+          countries: state.countries.toSorted((a, b) => a.population - b.population)
+          }
           } else {
             return {
               ...state,
               countries: newCha.sort((a, b) => b.population - a.population)
             }
           }
-        case BY_NAME:
-          const sorted = [...state.countries];
-          if(action.payload === 'AZ') {
-            return {
-              ...state,
-               /* countries: state.countries.toSorted((a, b) => a.population - b.population) */
-               countries: state.countries.toSorted((a, b) => {
-                if (a.name > b.name) {
-                    return 1;
-                }
-                if (b.name > a.name) {
-                    return -1
-                }
-                return 0;
+    case BY_NAME:
+      const sorted = [...state.countries];
+      if(action.payload === 'AZ') {
+        return {
+          ...state,
+          countries: state.countries.toSorted((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+              }
+            if (b.name > a.name) {
+              return -1
+              }
+              return 0;
             })
-               /*
-               -----myFavorites: state.allCharacters.sort((a, b) => a.id - b.id)--- MALLL! MODIFICA EL ESTADO PORQUE NO DA UN
-               NUEVO ARRAY!
-  
-              NO SE PUEDE USAR directamente el sort, o puedo usar el toSorted() xq me modificaEL STATE.ALLCHARACTER array, 
-              en el filter de arriba se puede porque me da un nuevo array, el sort me modifica el 
-              array del estado global. POR ESO NO LO USO DE UNA
-              SI LO QUIERE USAR DE UNA PODRÍA USAR UN toSorted();*/
-              /* myFavorites: newCha.sort((a, b) => a.id - b.id) */
            }
           } else {
             return {
               ...state,
-              /* countries: sorted.sort((a, b) => b.population - a.population) */
               countries: sorted.sort((a, b) => {
                 if (a.name > b.name) {
-                    return -1;
+                  return -1;
                 }
                 if (b.name > a.name) {
-                    return 1;
+                  return 1;
                 }
                 return 0;
-            })
-            }
+          })
           }
-      /* case REMOVE_FAV:
+    }
+    default:
       return {
-        ...state,
-        allCharacters: state.allCharacters.filter(el => el.id !== action.payload),
-        myFavorites: state.myFavorites.filter(el => el.id !== action.payload)
-      } */
-      default:
-        return {
-          ...state
+        ...state
         }
   }
 };

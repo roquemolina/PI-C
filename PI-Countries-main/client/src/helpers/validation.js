@@ -1,13 +1,6 @@
 let numRegExp = /\d/g,
 charRegExp = /[°!"#$%&/()=?¡¿'|¬´+}{_[*^¨~`:;]/g;
 
-/*
-passwordRegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
--at least 8 characters
-- must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number
-- Can contain special characters
- */
-
 export default function validation (obj) {
   let errors = {};
   if(!obj.name){
@@ -31,12 +24,6 @@ export default function validation (obj) {
   if(obj.season === "") {
     errors.season = 'Se requiere una season'
   }
-/*   if(obj.password.length < 6 || obj.password.length > 10) {
-    errors.password = 'La longitud debe ser entre 6 y 10 caracteres'
-  } else if (!passwordRegExp.test(obj.password)){
-    errors.password = 'La contraseña debe tener un nro'
-  } else {
-  } */
   
   return errors;
 };

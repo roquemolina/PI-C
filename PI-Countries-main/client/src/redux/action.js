@@ -8,10 +8,8 @@ export const BY_CONTINENT = 'BY_CONTINENT';
 export const BY_NAME = 'BY_NAME';
 export const ORDER = 'ORDER';
 
-
 /* using thunk middleware to use  async axios method. Then, ----DISPATCH to the reducer--- to change redux global state */
 /* dispatch  */
-
 export const getCountries = () => {
   const endpoint = 'http://localhost:3001/countries';
   return async (dispatch) => {
@@ -81,4 +79,3 @@ export const createAct = (activity) => {
     await axios.post(endpoint, activity);
   }
 }
-

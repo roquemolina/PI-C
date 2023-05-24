@@ -22,9 +22,7 @@ const CardContaner = () => {
    const [displayedObj, setDisplayedObj] = useState([]);
    const [currentPage, setCurrentPage] = useState(1);
    const [maxPage, setMaxPage] = useState(null);
-   
    let pagination = paginate(countries);
-   
    
    useEffect(() => {
          setDisplayed(pagination.items);
@@ -56,13 +54,13 @@ const CardContaner = () => {
          dispatch(searchActivities(name));
       }
    }
+
    useEffect(() => {
       setCurrentPage(1);
       setDisplayedObj(searchQuery);
       pagination = paginate(searchQuery);
       setDisplayed(pagination.items);
       setMaxPage(pagination.totalPages);
-      
     }, [searchQuery])
     
     useEffect(() => {
@@ -71,51 +69,59 @@ const CardContaner = () => {
        pagination = paginate(continentFilter);
        setDisplayed(pagination.items);
        setMaxPage(pagination.totalPages);
-       
      }, [continentFilter])
-   
-   const handlePages = (event) => {
-   if(event.target.id === "prev-btn") {
-      if(currentPage === 1) return;
-      pagination = paginate(displayedObj, currentPage -1);
-      setCurrentPage(currentPage - 1)
-      setDisplayed(pagination.items);
+     
+     const handlePages = (event) => {
+      if(event.target.id === "prev-btn") {
+         if(currentPage === 1) return;
+         pagination = paginate(displayedObj, currentPage -1);
+         setCurrentPage(currentPage - 1)
+         setDisplayed(pagination.items);
+      }
+      if(event.target.id === "next-btn") {
+         if(currentPage === maxPage) return;
+         setCurrentPage(currentPage + 1);
+         pagination = paginate(displayedObj, currentPage + 1);
+         setDisplayed(pagination.items);
+      }
+      if(event.target.id === "last-btn") {
+         if(currentPage === maxPage) return;
+         setCurrentPage(maxPage);
+         pagination = paginate(displayedObj, maxPage);
+         setDisplayed(pagination.items);
+      }
+      if(event.target.id === "first-btn") {
+         if(currentPage === maxPage) return;
+         setCurrentPage(1);
+         pagination = paginate(displayedObj, 1);
+         setDisplayed(pagination.items);
+      }
    }
-   if(event.target.id === "next-btn") {
-      if(currentPage === maxPage) return;
-      setCurrentPage(currentPage + 1);
-      pagination = paginate(displayedObj, currentPage + 1);
-      setDisplayed(pagination.items);
-   };
-};
-const byContinents = (event) => {
-   dispatch(getByContinent(event.target.value));
-}
-const byPopulatioin = (event) => {
-   if(event.target.id === 'byPop') {
-      dispatch(getByPopulation('A'));
+
+   const byContinents = (event) => {
+      dispatch(getByContinent(event.target.value));
    }
-   if(event.target.id === 'byPop2') {
-      dispatch(getByPopulation());
+   const byPopulatioin = (event) => {
+      if(event.target.id === 'byPop') {
+         dispatch(getByPopulation('A'));
+      }
+      if(event.target.id === 'byPop2') {
+         dispatch(getByPopulation());
+      }
    }
-}
-const byName = (event) => {
-   if(event.target.id === 'nameAZ') {
-      dispatch(getByName('AZ'));
+   const byName = (event) => {
+      if(event.target.id === 'nameAZ') {
+         dispatch(getByName('AZ'));
+      }
+      if(event.target.id === 'nameZA') {
+         dispatch(getByName());
+      }
    }
-   if(event.target.id === 'nameZA') {
-      dispatch(getByName());
-   }
-}
 
   return ( 
     <div>
-      <h2>Card conteiners</h2>
-      <h2>Muchos card</h2>
       <SearchForm putQuery={putQuery}/>
-      <div>
-         <button id="prev-btn" onClick={handlePages}>prev</button>
-         <button id="next-btn" onClick={handlePages}>next</button>
+      <div className="card-filters">
          <button id="get-activities" onClick={putActivities}>Get Act</button>
          <button id="get-countries" onClick={putActivities}>Get Cuontries</button>
          <button id="byPop" onClick={byPopulatioin}>POP1</button>
@@ -123,10 +129,9 @@ const byName = (event) => {
          <button id="nameAZ" onClick={byName}>Asc.</button>
          <button id="nameZA" onClick={byName}>Desc.</button>
       </div>
-
-      <div>
+      <div className="continent-filter">
       <label>
-      Continent:
+      Filter by continent:
       <select name="continents" onChange={byContinents}>
         <option value="All" >All</option>
         <option value="Asia">Asia</option>
@@ -139,6 +144,7 @@ const byName = (event) => {
       </select>
     </label>
       </div>
+      <div className="grid-fluid">
       {displayed.map((el) => {
          if(typeof el.id === 'string') {
             return (
@@ -160,13 +166,24 @@ const byName = (event) => {
                key={el.id}
                id={el.id}
                name={el.name}
+               length={el.length}
+               difficulty={el.difficulty}
+               season={el.season}
+
                paises={el.countries}
             />
             )
          }
       }
       )}
+      </div>
+      <div className="pagination">
+      <button id="first-btn" onClick={handlePages}>First</button>
+      <button id="prev-btn" onClick={handlePages}>Prev</button>
       <p>{currentPage} of {maxPage}</p>
+      <button id="next-btn" onClick={handlePages}>Next</button>
+      <button id="last-btn" onClick={handlePages}>Last</button>
+      </div>
     </div>
    );
 }

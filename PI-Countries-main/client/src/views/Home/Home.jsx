@@ -3,11 +3,10 @@ import CardContaner from '../../components/CardContainer/CardContainer';
 const Home = () => {
 
   return ( 
-    <>
+    <div className='home'>
     <h3>Home</h3>
-    <p>Viene card container</p>
     <CardContaner />
-    </>
+    </div>
    );
 }
  

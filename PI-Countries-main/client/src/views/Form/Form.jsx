@@ -51,9 +51,9 @@ let initialForm = {
     }
     
   return ( 
-    <>
-    <h3>Form</h3>
-    <form onSubmit={handleSubmit}>
+    <div className='form-view'>
+    <h2>Add your activity</h2>
+    <form onSubmit={handleSubmit} className='form-validation'>
     <label htmlFor="name">Name:</label>
     <input 
       type="text"
@@ -159,7 +159,7 @@ let initialForm = {
   </form>
 
 
-    </>
+    </div>
    );
 }
  
