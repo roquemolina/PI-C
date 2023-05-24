@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import searchValidation from '../../helpers/searchValidation';
 import {useDispatch, useSelector} from "react-redux"
-import { createAct } from '../../redux/action';
 
 let initialForm = {
     name: ""
@@ -9,10 +8,8 @@ let initialForm = {
   
   
   const SearchForm = (props) => {
-    const dispatch = useDispatch();
     const [form, setForm] = useState(initialForm);
     const [errors, setErrors] = useState(initialForm);
-    const searchQuery = useSelector((state) => state.searchQuery);
     const [queryOption, setQueryOption] = useState('country');
     
     
@@ -36,15 +33,11 @@ let initialForm = {
     function handleSubmit (e) {
       e.preventDefault();
       if(Object.keys(errors).length === 0){
-        if(queryOption === "country") {
-          props.putQuery(form.name);
-        } else {
-          dispatch(createAct(form));
-        }
+        props.putQuery(form.name, queryOption);
         setForm(initialForm)
         setErrors(initialForm)
-      } else {
-        window.alert('Debe llenar todos los campos');
+        } else {
+          window.alert('Debe llenar todos los campos');
       }
     }
     

@@ -1,0 +1,184 @@
+[
+  {
+    "name": "Rafting",
+    "difficulty": 3,
+    "length": 5,
+    "season": "winter",
+    "countries": ["LAO", "TKM", "CHL"]
+  },
+  {
+    "name": "Walk",
+    "difficulty":3,
+    "length": 1,
+    "season": "winter",
+    "countries": ["NPL", "VEN", "MDG", "CMR"]
+  },
+  {
+    "name": "Walk",
+    "difficulty": 1,
+    "length": 3,
+    "season": "winter",
+    "countries": ["YEM", "MOZ", "GHA"]
+  },
+  {
+    "name": "Rafting",
+    "difficulty": 4,
+    "length": 4,
+    "season": "winter",
+    "countries": ["SAU", "CAN", "MYS", "MOZ"]
+  },
+  {
+    "name": "Food",
+    "difficulty": 2,
+    "length": 5,
+    "season": "winter",
+    "countries": ["IRQ", "MAR", "SAU"]
+  },
+  {
+    "name": "Food",
+    "difficulty": 1,
+    "length": 5,
+    "season": "winter",
+    "countries": ["POL", "ITA", "MEX", "CAN"]
+  },
+  {
+    "name": "Wine",
+    "difficulty": 1,
+    "length": 5,
+    "season": "winter",
+    "countries": ["ARG", "FRA", "CHL"]
+  },
+  {
+    "name": "Beach walk",
+    "difficulty": 2,
+    "length": 3,
+    "season": "winter",
+    "countries": ["MEX", "BRA", "ESP"]
+  },
+  {
+    "name": "Beach walk",
+    "difficulty": 2,
+    "length": 1,
+    "season": "winter",
+    "countries": ["LAO", "TKM", "CHL"]
+  },
+  {
+    "name": "Snorkeling",
+    "difficulty": 5,
+    "length": 5,
+    "season": "fall",
+    "countries": ["PER", "DZA", "UKR"]
+  },
+  {
+    "name": "Fishing",
+    "difficulty": 3,
+    "length": 5,
+    "season": "winter",
+    "countries": ["GBR", "ESP", "UGA"]
+  },
+  {
+    "name": "Snorkeling",
+    "difficulty": 3,
+    "length": 1,
+    "season": "winter",
+    "countries": ["GBR", "TZA", "CHL", "ITA", "ZAF"]
+  },
+  {
+    "name": "Fishing",
+    "difficulty": 3,
+    "length": 2,
+    "season": "winter",
+    "countries": ["DEU", "IRN", "COG", "ARG"]
+  },
+  {
+    "name": "Camping",
+    "difficulty": 3,
+    "length": 5,
+    "season": "winter",
+    "countries": ["BGD", "JPN", "ETH", "PHL", "PER", "VNM"]
+  },
+  {
+    "name": "Camping",
+    "difficulty": 3,
+    "length": 5,
+    "season": "winter",
+    "countries": ["NGA", "BGD", "RUS", "CHN"]
+  },
+  {
+    "name": "Camping",
+    "difficulty": 3,
+    "length": 5,
+    "season": "fall",
+    "countries": ["REU", "IND", "GBR", "MSR", "NGA", "TUN", "AZE", "CHN"]
+  },
+  {
+    "name": "Camping",
+    "difficulty": 2,
+    "length": 4,
+    "season": "spring",
+    "countries": ["MNE", "ARG", "CHL", "PER", "DEU", "GEO", "NCL"]
+  },
+  {
+    "name": "Walk",
+    "difficulty": 3,
+    "length": 1,
+    "season": "winter",
+    "countries": ["PCN", "DEU", "MLT", "SHN"]
+  },
+  {
+    "name": "Running",
+    "difficulty": 3,
+    "length": 3,
+    "season": "sring",
+    "countries": ["ARG", "FIN", "ESP", "FRA", "BRA", "QAT"]
+  },
+  {
+    "name": "Running",
+    "difficulty": 4,
+    "length": 2,
+    "season": "summer",
+    "countries": ["PER", "DMA", "FIN"]
+  },
+  {
+    "name": "Running",
+    "difficulty": 3,
+    "length": 3,
+    "season": "summer",
+    "countries": ["BTN", "ATF", "CHL", "DMA", "FIN"]
+  },
+  {
+    "name": "Rafting",
+    "difficulty": 5,
+    "length": 4,
+    "season": "fall",
+    "countries": ["PAN", "LCA", "UNK", "BRA"]
+  },
+  {
+    "name": "Cycling",
+    "difficulty": 3,
+    "length": 3,
+    "season": "fall",
+    "countries": ["CYP", "PAK", "CHL", "BRA", "PAN"]
+  },
+  {
+    "name": "Rafting",
+    "difficulty": 4,
+    "length": 4,
+    "season": "winter",
+    "countries": ["ARG", "BRA", "MMR"]
+  },
+  {
+    "name": "Museum",
+    "difficulty": 1,
+    "length": 1,
+    "season": "winter",
+    "countries": ["GIB", "ESP", "ARG"]
+  },
+  {
+    "name": "Museum",
+    "difficulty": 1,
+    "length": 1,
+    "season": "winter",
+    "countries": ["FRA", "VCT", "CHL"]
+  }
+]

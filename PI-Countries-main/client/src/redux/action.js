@@ -3,6 +3,8 @@ export const GET_COUNTRIES = 'GET_COUNTRIES';
 export const GET_ACTIVITIES = "GET_ACTIVITIES";
 export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
 export const GET_DETAIL = "GET_DETAIL";
+export const SEARCH_ACTIVITIES = "SEARCH_ACTIVITIES";
+
 export const BY_CONTINENT = 'BY_CONTINENT';
 export const REMOVE_FAV = 'REMOVE_FAV';
 export const FILTER = 'FILTER';
@@ -41,21 +43,18 @@ export const getDetail = (id) => {
     };
 };
 export const searchCountries = (countryName) => {
-  const endpoint = 'http://localhost:3001/countries';
-  return async (dispatch) => {
-     let {data} = await axios.get(endpoint, {
-      params: {
-        name: countryName,
-      }
-    });
-        return dispatch({
-           type: SEARCH_COUNTRIES,
-           payload: data,
-        });
-    };
+  return {
+    type: SEARCH_COUNTRIES,
+    payload: countryName,
+  }
 };
 
-
+export const searchActivities = (activityName) => {
+  return {
+    type: SEARCH_ACTIVITIES,
+    payload: activityName,
+    };
+};
 
 export function getByContinent(continent) {
   return {

@@ -18,9 +18,11 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn, Country } = require('./src/db.js');
+const { conn, Country, Activity } = require('./src/db.js');
 const axios = require("axios");
-const downloadedData = require('./countries.json');
+const downloadedData = require('./src/assets/countries.json');
+const bulkData = require('./src/assets/activitiesBulk.json');
+const {createActivity} = require("./src/controllers/activitiesControllers.js")
 // ENDPOINT
 /* https://restcountries.com/v3/all */
 
@@ -53,10 +55,27 @@ conn.sync({ force: true }).then(() => {
         }
       })
       await Country.bulkCreate(apiCountries);
-      console.log('DB created');
+      console.log('Countries created');
+
+      const allActivities = Activity.findAll();
+      if(!allActivities.length){
+        let activitiesBulkData = bulkData.map((e) => {
+          return {
+            name: e.name,
+            difficulty: e.difficulty,
+            length: e.length,
+            season: e.season,
+            countries: e.countries
+          }
+        })
+
+        activitiesBulkData.forEach(e => {
+          createActivity(e.name, e.difficulty, e.length, e.season, e.countries)
+        })
+        console.log('Activities created');
+      }
     }
     console.log('%s listening at 3001'); // eslint-disable-line no-console
-
   
   
   });

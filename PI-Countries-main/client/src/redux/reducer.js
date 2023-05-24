@@ -1,4 +1,4 @@
-import { GET_COUNTRIES, GET_ACTIVITIES, SEARCH_COUNTRIES, GET_DETAIL, BY_CONTINENT, FILTER, ORDER, REMOVE_FAV } from "./action";
+import { GET_COUNTRIES, GET_ACTIVITIES, SEARCH_COUNTRIES, GET_DETAIL, BY_CONTINENT, FILTER, ORDER, REMOVE_FAV, SEARCH_ACTIVITIES } from "./action";
 
 const initialState = {
   countries: [],
@@ -6,7 +6,7 @@ const initialState = {
   displayedCountries: [],
   displayedActivities: [],
   searchQuery: [],
-  countryDetail:{}
+  countryDetail:{},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -23,10 +23,16 @@ const rootReducer = (state = initialState, action) => {
         activities: action.payload,
         displayedActivities: action.payload
       }
+      
       case SEARCH_COUNTRIES:
       return {
         ...state,
-        searchQuery: action.payload
+        searchQuery: state.countries.filter(el => el.name.toLowerCase().includes(action.payload.toLowerCase()))
+      }
+      case SEARCH_ACTIVITIES:
+        return {
+          ...state,
+          searchQuery: state.activities.filter(el => el.name.toLowerCase().includes(action.payload.toLowerCase()))
       }
       case GET_DETAIL:
       return {

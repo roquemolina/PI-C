@@ -2,7 +2,7 @@ import Card from "../Card/Card";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getCountries, getActivities, getByContinent, getByPopulation, searchCountries } from "../../redux/action";
+import { getCountries, getActivities, getByContinent, getByPopulation, searchCountries, searchActivities } from "../../redux/action";
 import paginate from "../../helpers/paginate";
 import SearchForm from "../SearchForm/SearchForm";
 
@@ -39,10 +39,21 @@ const CardContaner = () => {
          setDisplayed(pagination.items);
          setMaxPage(pagination.totalPages);
       }
+      if(event.target.id === "get-countries") {
+         setCurrentPage(1);
+         setDisplayedObj(countries);
+         pagination = paginate(countries);
+         setDisplayed(pagination.items);
+         setMaxPage(pagination.totalPages);
+      }
    }
 
-   const putQuery = (name) => {
-      dispatch(searchCountries(name));
+   const putQuery = (name, option) => {
+      if(option === "country"){
+         dispatch(searchCountries(name));
+      } else {
+         dispatch(searchActivities(name));
+      }
    }
    useEffect(() => {
       setCurrentPage(1);
@@ -94,6 +105,7 @@ const byPopulatioin = (event) => {
          <button id="prev-btn" onClick={handlePages}>prev</button>
          <button id="next-btn" onClick={handlePages}>next</button>
          <button id="get-activities" onClick={putActivities}>Get Act</button>
+         <button id="get-countries" onClick={putActivities}>Get Cuontries</button>
          <button id="byCont" onClick={(event) => byContinents(event)}>CONTTTT</button>
          <button id="byCont2" onClick={(event) => byContinents(event)}>CONTTTT</button>
          <button id="byPop" onClick={(event) => byPopulatioin(event)}>POP1</button>
