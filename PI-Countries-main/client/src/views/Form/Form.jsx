@@ -45,8 +45,6 @@ let initialForm = {
         setErrors(initialForm)
         setSelectedCountries([]);
         dispatch(createAct(form));
-      } else {
-        window.alert('Debe llenar todos los campos');
       }
     }
     

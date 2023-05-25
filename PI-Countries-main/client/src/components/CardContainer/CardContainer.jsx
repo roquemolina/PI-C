@@ -91,7 +91,7 @@ const CardContaner = () => {
          setDisplayed(pagination.items);
       }
       if(event.target.id === "first-btn") {
-         if(currentPage === maxPage) return;
+         if(currentPage === 1) return;
          setCurrentPage(1);
          pagination = paginate(displayedObj, 1);
          setDisplayed(pagination.items);
