@@ -17,12 +17,15 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+require('dotenv').config();
 const server = require('./src/app.js');
 const { conn, Country, Activity } = require('./src/db.js');
 const axios = require("axios");
 const downloadedData = require('./src/assets/countries.json');
 const bulkData = require('./src/assets/activitiesBulk.json');
-const {createActivity} = require("./src/controllers/activitiesControllers.js")
+const {createActivity} = require("./src/controllers/activitiesControllers.js");
+const PORT = process.env.PORT || 3001;
+
 // ENDPOINT
 /* https://restcountries.com/v3/all */
 
@@ -37,6 +40,7 @@ const {createActivity} = require("./src/controllers/activitiesControllers.js")
 }); */
 
 conn.sync({ force: true }).then(() => {
+  /* force true new db each op */
   server.listen(3001, async () => {
     const allCountries = Country.findAll();
     if(!allCountries.length){
@@ -75,7 +79,7 @@ conn.sync({ force: true }).then(() => {
         console.log('Activities created');
       }
     }
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
   
   
   });
