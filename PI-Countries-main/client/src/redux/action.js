@@ -11,7 +11,8 @@ export const ORDER = 'ORDER';
 /* using thunk middleware to use  async axios method. Then, ----DISPATCH to the reducer--- to change redux global state */
 /* dispatch  */
 export const getCountries = () => {
-  const endpoint = 'http://localhost:3001/countries';
+  const endpoint = '/countries';
+  /* const endpoint = 'http://localhost:3001/countries'; */
   return async (dispatch) => {
      let {data} = await axios.get(endpoint);
         return dispatch({
@@ -21,7 +22,8 @@ export const getCountries = () => {
     };
 };
 export const getActivities = () => {
-  const endpoint = 'http://localhost:3001/activities';
+  const endpoint = '/activities';
+  /* const endpoint = 'http://localhost:3001/activities'; */
   return async (dispatch) => {
      let {data} = await axios.get(endpoint);
         return dispatch({
@@ -31,7 +33,8 @@ export const getActivities = () => {
     };
 };
 export const getDetail = (id) => {
-  const endpoint = `http://localhost:3001/countries/${id}`;
+  const endpoint = `/countries/${id}`;
+  /* const endpoint = `http://localhost:3001/countries/${id}`; */
   return async (dispatch) => {
      let {data} = await axios.get(endpoint);
         return dispatch({
@@ -74,7 +77,8 @@ export function getByName(flow) {
 };
 
 export const createAct = (activity) => {
-  const endpoint = 'http://localhost:3001/activities';
+  const endpoint = '/activities';
+  /* const endpoint = 'http://localhost:3001/activities'; */
   return async (dispatch) => {
     await axios.post(endpoint, activity);
   }

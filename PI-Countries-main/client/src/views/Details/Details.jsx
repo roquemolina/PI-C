@@ -15,7 +15,8 @@ function Details() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios(`http://localhost:3001/countries/${detailId}`)
+    axios(`/countries/${detailId}`)
+    /* axios(`http://localhost:3001/countries/${detailId}`) */
     .then(({ data }) => {
       console.log(data);
        if (data.name) {
