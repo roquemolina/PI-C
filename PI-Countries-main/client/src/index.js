@@ -8,8 +8,8 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import axios from 'axios';
 
-axios.defaults.baseURL = "http://localhost:3001/"; 
-/* axios.defaults.baseURL = "https://pi-back-production-5037.up.railway.app/"; */
+/*axios.defaults.baseURL = "http://localhost:3001/"; */
+axios.defaults.baseURL = "https://pi-back-production-5037.up.railway.app/";
 
 
 
