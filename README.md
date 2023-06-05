@@ -4,6 +4,7 @@
 
 -  Build a single page application using the technologies: **React**, **Redux**, **Node**, **Express** y **Sequelize**.
 -  The main idea of this project was to build a web application using the restcountries API. The application allows users to perform the following tasks: Search for countries, View country information, Filter countries, Sort countries, Create tourist activities.
+-  Deployed project at https://pi-front-production-1d05.up.railway.app/
 
 <br />
 
