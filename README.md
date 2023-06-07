@@ -14,7 +14,7 @@
 
 ### **🖱 Database Models**
 
-The project consists of two models: "User" and "Country". The "User" model is used for user authentication and management, while the "Country" model is used for storing country information and tourist activities. The relationship between the models is a many-to-many relationship.
+The project consists of two models: "Activity" and "Country". The "Activity" model is used for an activity authentication and management, while the "Country" model is used for storing country information and tourist activities. The relationship between the models is a many-to-many relationship.
 
 <br />
 
